@@ -71,7 +71,15 @@ public class Conversor {
 		JButton btnAceptarSeleccion = new JButton("Aceptar");
 		btnAceptarSeleccion.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				myLayout.show(frame.getContentPane(), "panelConversorMoneda" );
+				
+				int indexCombo = comboBoxSeleccion.getSelectedIndex();
+				if(indexCombo == 0) {
+					myLayout.show(frame.getContentPane(), "panelConversorMoneda" );
+				}
+				else if(indexCombo == 1) {
+					myLayout.show(frame.getContentPane(), "panelConversorHorario" );
+				}
+				
 			}
 		});
 		btnAceptarSeleccion.setBounds(101, 90, 85, 21);
@@ -109,6 +117,12 @@ public class Conversor {
 		JButton btnConvertirMoneda = new JButton("Convertir");
 		btnConvertirMoneda.setBounds(164, 155, 85, 21);
 		panelConversorMoneda.add(btnConvertirMoneda);
+		
+		JPanel panelConversorHorario = new JPanel();
+		frame.getContentPane().add(panelConversorHorario, "panelConversorHorario");
+		
+		JLabel lblTituloHorario = new JLabel("CONVERSOR ZONA HORARIA");
+		panelConversorHorario.add(lblTituloHorario);
 	}
 
 }
