@@ -21,7 +21,8 @@ public class Conversor {
 
 	private JFrame frame;
 	private JTextField textFieldDinero;
-
+	boolean invertirConversionMoneda = false;
+	String [] monedas = {"pesos Colombianos", "Dólar", "Euros", "Libras esterlinas", "Yen Japonés", "Won sul-coreano"};
 	/**
 	 * Launch the application.
 	 */
@@ -45,6 +46,22 @@ public class Conversor {
 		initialize();
 	}
 
+	public void invertir(JComboBox comboBoxDe, JComboBox comboBoxA) {
+		comboBoxA.removeAllItems();
+		comboBoxDe.removeAllItems();
+		if(invertirConversionMoneda == false) {
+			comboBoxDe.addItem(monedas[0]);
+			for(int i = 1; i <= 5; i++) {
+				comboBoxA.addItem(monedas[i]);
+			}
+		}
+		else {
+			comboBoxA.addItem(monedas[0]);
+			for(int i = 1; i <= 5; i++) {
+				comboBoxDe.addItem(monedas[i]);
+			}
+		}
+	}
 	/**
 	 * Initialize the contents of the frame.
 	 */
@@ -56,7 +73,7 @@ public class Conversor {
 		frame.getContentPane().setLayout(myLayout);
 		
 		JPanel panelSeleccion = new JPanel();
-		frame.getContentPane().add(panelSeleccion, "name_16826492796899");
+		frame.getContentPane().add(panelSeleccion, "panelSeleccion");
 		panelSeleccion.setLayout(null);
 		
 		JLabel lblTitulo = new JLabel("CONVERSOR");
@@ -67,6 +84,7 @@ public class Conversor {
 		comboBoxSeleccion.setModel(new DefaultComboBoxModel(new String[] {"Conversor de Moneda", "Conversor de Zona Horaria"}));
 		comboBoxSeleccion.setBounds(132, 47, 130, 21);
 		panelSeleccion.add(comboBoxSeleccion);
+		
 		
 		JButton btnAceptarSeleccion = new JButton("Aceptar");
 		btnAceptarSeleccion.addActionListener(new ActionListener() {
@@ -98,19 +116,39 @@ public class Conversor {
 		panelConversorMoneda.add(textFieldDinero);
 		textFieldDinero.setColumns(10);
 		
-		JComboBox comboBoxDe = new JComboBox();
-		comboBoxDe.setBounds(123, 111, 29, 21);
+		JComboBox<String> comboBoxDe = new JComboBox();
+		comboBoxDe.setBounds(36, 111, 116, 21);
 		panelConversorMoneda.add(comboBoxDe);
 		
-		JComboBox comboBoxA = new JComboBox();
-		comboBoxA.setBounds(272, 111, 29, 21);
+		JComboBox<String> comboBoxA = new JComboBox();
+		comboBoxA.setBounds(272, 111, 116, 21);
 		panelConversorMoneda.add(comboBoxA);
-		
+			
 		JButton btnInvertirSeleccion = new JButton("Invertir");
+		btnInvertirSeleccion.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(invertirConversionMoneda == false) {
+					invertirConversionMoneda = true;
+				}
+				else {
+					invertirConversionMoneda = false;
+				}
+				invertir(comboBoxDe, comboBoxA);
+			}
+		});
 		btnInvertirSeleccion.setBounds(164, 111, 85, 21);
 		panelConversorMoneda.add(btnInvertirSeleccion);
 		
+
+
+		
+		
 		JButton btnRegresar = new JButton("Regresar");
+		btnRegresar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				myLayout.show(frame.getContentPane(), "panelSeleccion" );
+			}
+		});
 		btnRegresar.setBounds(0, 242, 85, 21);
 		panelConversorMoneda.add(btnRegresar);
 		
