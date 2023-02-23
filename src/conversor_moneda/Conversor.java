@@ -18,6 +18,8 @@ import javax.swing.JTextField;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JSpinner;
+import java.awt.Color;
+import javax.swing.ImageIcon;
 
 public class Conversor {
 
@@ -115,11 +117,12 @@ public class Conversor {
 		frame.getContentPane().setLayout(myLayout);
 		
 		JPanel panelSeleccion = new JPanel();
+		panelSeleccion.setBackground(new Color(192, 192, 192));
 		frame.getContentPane().add(panelSeleccion, "panelSeleccion");
 		panelSeleccion.setLayout(null);
 		
 		JLabel lblTitulo = new JLabel("CONVERSOR");
-		lblTitulo.setBounds(171, 10, 65, 13);
+		lblTitulo.setBounds(66, 10, 286, 28);
 		panelSeleccion.add(lblTitulo);
 		
 		JComboBox comboBoxSeleccion = new JComboBox();
@@ -206,26 +209,33 @@ public class Conversor {
 			public void actionPerformed(ActionEvent e) {
 				
 				dinero = textFieldDinero.getText();
-				dineroDouble = Double.parseDouble(dinero);
 				
-				if(invertirConversionMoneda == false) {
-					resultadoConversion = dineroDouble / conversion[comboBoxA.getSelectedIndex() + 1];
-					dineroConvertido = String.format("%.2f",resultadoConversion);
+				if(dinero.isEmpty())
+					JOptionPane.showMessageDialog(null,"Ingrese un valor!");
+				else
+				{
+					dineroDouble = Double.parseDouble(dinero);
+					
+					if(invertirConversionMoneda == false) {
+						resultadoConversion = dineroDouble / conversion[comboBoxA.getSelectedIndex() + 1];
+						dineroConvertido = String.format("%.2f",resultadoConversion);
+					}
+					else {
+						resultadoConversion = dineroDouble * conversion[comboBoxDe.getSelectedIndex() + 1];
+						dineroConvertido = String.format("%.2f",resultadoConversion);
+					}
+					//lblNewLabel.setText(dineroConvertido);
+					if(invertirConversionMoneda == false) {
+						JOptionPane.showMessageDialog(null, dinero + " " + simboloMoneda[comboBoxDe.getSelectedIndex()] + " son "
+								 + dineroConvertido + " " + simboloMoneda[comboBoxA.getSelectedIndex()+1]);
+					}
+					else {
+						JOptionPane.showMessageDialog(null, dinero + " " + simboloMoneda[comboBoxDe.getSelectedIndex()+1] + " son "
+								 + dineroConvertido + " " + simboloMoneda[comboBoxA.getSelectedIndex()]);
+					}
+					
 				}
-				else {
-					resultadoConversion = dineroDouble * conversion[comboBoxDe.getSelectedIndex() + 1];
-					dineroConvertido = String.format("%.2f",resultadoConversion);
-				}
-				//lblNewLabel.setText(dineroConvertido);
-				if(invertirConversionMoneda == false) {
-					JOptionPane.showMessageDialog(null, dinero + " " + simboloMoneda[comboBoxDe.getSelectedIndex()] + " son "
-							 + dineroConvertido + " " + simboloMoneda[comboBoxA.getSelectedIndex()+1]);
-				}
-				else {
-					JOptionPane.showMessageDialog(null, dinero + " " + simboloMoneda[comboBoxDe.getSelectedIndex()+1] + " son "
-							 + dineroConvertido + " " + simboloMoneda[comboBoxA.getSelectedIndex()]);
-				}
-				
+
 
 			}
 		});
