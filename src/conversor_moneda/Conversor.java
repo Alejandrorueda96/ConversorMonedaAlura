@@ -173,7 +173,10 @@ public class Conversor {
 					resultadoConversion = dineroDouble / conversion[comboBoxA.getSelectedIndex() + 1];
 					dineroConvertido = Double.toString(resultadoConversion);
 				}
-				
+				else {
+					resultadoConversion = dineroDouble * conversion[comboBoxDe.getSelectedIndex() + 1];
+					dineroConvertido = Double.toString(resultadoConversion);
+				}
 				lblNewLabel.setText(dineroConvertido);
 			}
 		});
