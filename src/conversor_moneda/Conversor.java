@@ -17,6 +17,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JTextField;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JSpinner;
 
 public class Conversor {
 
@@ -29,7 +30,14 @@ public class Conversor {
 	double resultadoConversion;
 	Double [] conversion = {1.0, 4899.84, 5197.0, 5903.51, 36.3184, 3.76006};
 	String [] monedas = {"pesos Colombianos", "Dólar", "Euros", "Libras esterlinas", "Yen Japonés", "Won sul-coreano"};
-	String [] simboloMoneda = {"COP", "USD", "EUR", "GBP", "JPY", "KRW"};;
+	String [] simboloMoneda = {"COP", "USD", "EUR", "GBP", "JPY", "KRW"};
+	String [] longitud = {"mm", "cm", "dm", "m", "dam", "hm", "km"};
+	String unidad;
+	Double unidadDouble;
+	private JTextField textFieldUnidad;
+	//LocalDateTime localDate = LocalDateTime.now();
+	
+	
 	/**
 	 * Launch the application.
 	 */
@@ -69,6 +77,37 @@ public class Conversor {
 			}
 		}
 	}
+	
+	public void inicializarLongitud(JComboBox unidadBase, JComboBox unidadAConvertir) {
+		for(int i = 0; i <= longitud.length-1; i++) {
+			unidadBase.addItem(longitud[i]);
+			unidadAConvertir.addItem(longitud[i]);
+		}
+	}
+	
+	public void calcularLongitud(JComboBox unidadBase, JComboBox unidadAConvertir) {
+		unidad = textFieldUnidad.getText();
+		unidadDouble = Double.parseDouble(unidad);
+		
+		int i = unidadBase.getSelectedIndex();
+		int j = unidadAConvertir.getSelectedIndex();
+		
+		if(i<j) {
+			for(; i < j; i++) {
+				unidadDouble /= 10;
+				System.out.println(unidadDouble);
+			}
+		}
+		else if(i>j) {
+			for(; i > j; i--) {
+				unidadDouble *= 10;
+				System.out.println(unidadDouble);
+			}
+		}
+		else if(i == j)
+			System.out.println("Misma unidad");
+	}
+
 	/**
 	 * Initialize the contents of the frame.
 	 */
@@ -161,10 +200,6 @@ public class Conversor {
 		btnRegresar.setBounds(0, 242, 85, 21);
 		panelConversorMoneda.add(btnRegresar);
 		
-		JLabel lblNewLabel = new JLabel("resultado");
-		lblNewLabel.setBounds(184, 199, 45, 13);
-		panelConversorMoneda.add(lblNewLabel);
-		
 		JButton btnConvertirMoneda = new JButton("Convertir");
 		btnConvertirMoneda.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -174,11 +209,11 @@ public class Conversor {
 				
 				if(invertirConversionMoneda == false) {
 					resultadoConversion = dineroDouble / conversion[comboBoxA.getSelectedIndex() + 1];
-					dineroConvertido = Double.toString(resultadoConversion);
+					dineroConvertido = String.format("%.2f",resultadoConversion);
 				}
 				else {
 					resultadoConversion = dineroDouble * conversion[comboBoxDe.getSelectedIndex() + 1];
-					dineroConvertido = Double.toString(resultadoConversion);
+					dineroConvertido = String.format("%.2f",resultadoConversion);
 				}
 				//lblNewLabel.setText(dineroConvertido);
 				if(invertirConversionMoneda == false) {
@@ -193,16 +228,58 @@ public class Conversor {
 
 			}
 		});
-		btnConvertirMoneda.setBounds(164, 156, 96, 21);
+		btnConvertirMoneda.setBounds(164, 155, 96, 21);
 		panelConversorMoneda.add(btnConvertirMoneda);
+		
+		JLabel lblNewLabel = new JLabel("Cantidad");
+		lblNewLabel.setBounds(188, 40, 45, 13);
+		panelConversorMoneda.add(lblNewLabel);
+		
+		JLabel lblNewLabel_1 = new JLabel("Desde la moneda");
+		lblNewLabel_1.setBounds(51, 88, 91, 13);
+		panelConversorMoneda.add(lblNewLabel_1);
+		
+		JLabel lblNewLabel_2 = new JLabel("A la moneda");
+		lblNewLabel_2.setBounds(294, 88, 69, 13);
+		panelConversorMoneda.add(lblNewLabel_2);
 		
 
 		
 		JPanel panelConversorHorario = new JPanel();
 		frame.getContentPane().add(panelConversorHorario, "panelConversorHorario");
+		panelConversorHorario.setLayout(null);
 		
-		JLabel lblTituloHorario = new JLabel("CONVERSOR ZONA HORARIA");
+		JLabel lblhora = new JLabel("h");
+		lblhora.setBounds(118, 167, 230, 13);
+		panelConversorHorario.add(lblhora);
+		
+		JLabel lblTituloHorario = new JLabel("CONVERSOR LONGITUD");
+		lblTituloHorario.setBounds(154, 10, 133, 13);
 		panelConversorHorario.add(lblTituloHorario);
+		
+		
+		JComboBox comboBoxLongitudDe = new JComboBox();
+		comboBoxLongitudDe.setBounds(105, 71, 58, 21);
+		panelConversorHorario.add(comboBoxLongitudDe);
+		
+		JComboBox comboBoxLongitudA = new JComboBox();
+		comboBoxLongitudA.setBounds(238, 71, 47, 21);
+		panelConversorHorario.add(comboBoxLongitudA);
+		
+		inicializarLongitud(comboBoxLongitudDe, comboBoxLongitudA);
+		
+		textFieldUnidad = new JTextField();
+		textFieldUnidad.setBounds(164, 33, 96, 19);
+		panelConversorHorario.add(textFieldUnidad);
+		textFieldUnidad.setColumns(10);
+		
+		JButton btnNewButton = new JButton("mostrar");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				calcularLongitud(comboBoxLongitudDe, comboBoxLongitudA);
+			}
+		});
+		btnNewButton.setBounds(159, 113, 85, 21);
+		panelConversorHorario.add(btnNewButton);
 	}
-
 }
