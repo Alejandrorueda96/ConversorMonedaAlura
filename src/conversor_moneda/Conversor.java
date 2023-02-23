@@ -146,6 +146,11 @@ public class Conversor {
 		panelSeleccion.add(btnAceptarSeleccion);
 		
 		JButton btnCancelarSeleccion = new JButton("Cancelar");
+		btnCancelarSeleccion.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
+			}
+		});
 		btnCancelarSeleccion.setBounds(220, 90, 85, 21);
 		panelSeleccion.add(btnCancelarSeleccion);
 		
