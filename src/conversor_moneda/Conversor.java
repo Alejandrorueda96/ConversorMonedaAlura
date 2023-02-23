@@ -22,6 +22,11 @@ public class Conversor {
 	private JFrame frame;
 	private JTextField textFieldDinero;
 	boolean invertirConversionMoneda = false;
+	String dinero;
+	String dineroConvertido;
+	double dineroDouble;
+	double resultadoConversion;
+	Double [] conversion = {1.0, 4899.84, 5197.0, 5903.51, 36.3184, 3.76006};
 	String [] monedas = {"pesos Colombianos", "Dólar", "Euros", "Libras esterlinas", "Yen Japonés", "Won sul-coreano"};
 	/**
 	 * Launch the application.
@@ -117,13 +122,15 @@ public class Conversor {
 		textFieldDinero.setColumns(10);
 		
 		JComboBox<String> comboBoxDe = new JComboBox();
-		comboBoxDe.setBounds(36, 111, 116, 21);
+		comboBoxDe.setBounds(25, 111, 127, 21);
 		panelConversorMoneda.add(comboBoxDe);
 		
 		JComboBox<String> comboBoxA = new JComboBox();
 		comboBoxA.setBounds(272, 111, 116, 21);
 		panelConversorMoneda.add(comboBoxA);
-			
+		
+		invertir(comboBoxDe, comboBoxA);
+		
 		JButton btnInvertirSeleccion = new JButton("Invertir");
 		btnInvertirSeleccion.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -152,9 +159,28 @@ public class Conversor {
 		btnRegresar.setBounds(0, 242, 85, 21);
 		panelConversorMoneda.add(btnRegresar);
 		
+		JLabel lblNewLabel = new JLabel("resultado");
+		lblNewLabel.setBounds(184, 199, 45, 13);
+		panelConversorMoneda.add(lblNewLabel);
+		
 		JButton btnConvertirMoneda = new JButton("Convertir");
-		btnConvertirMoneda.setBounds(164, 155, 85, 21);
+		btnConvertirMoneda.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dinero = textFieldDinero.getText();
+				dineroDouble = Double.parseDouble(dinero);
+				
+				if(invertirConversionMoneda == false) {
+					resultadoConversion = dineroDouble / conversion[comboBoxA.getSelectedIndex() + 1];
+					dineroConvertido = Double.toString(resultadoConversion);
+				}
+				
+				lblNewLabel.setText(dineroConvertido);
+			}
+		});
+		btnConvertirMoneda.setBounds(164, 156, 96, 21);
 		panelConversorMoneda.add(btnConvertirMoneda);
+		
+
 		
 		JPanel panelConversorHorario = new JPanel();
 		frame.getContentPane().add(panelConversorHorario, "panelConversorHorario");
