@@ -88,22 +88,36 @@ public class Conversor {
 	}
 	
 	public void calcularLongitud(JComboBox unidadBase, JComboBox unidadAConvertir) {
-		unidad = textFieldUnidad.getText();
-		unidadDouble = Double.parseDouble(unidad);
 		
-		int i = unidadBase.getSelectedIndex();
-		int j = unidadAConvertir.getSelectedIndex();
-		
-		if(i<j) {
-			for(; i < j; i++) {
-				unidadDouble /= 10;
+		try {
+			unidad = textFieldUnidad.getText();
+			if(unidad.isEmpty()) {
+				JOptionPane.showMessageDialog(null, "El campo cantidad no puede estar vacio");
+			}
+			else {
+				unidadDouble = Double.parseDouble(unidad);
+				
+				int i = unidadBase.getSelectedIndex();
+				int j = unidadAConvertir.getSelectedIndex();
+				
+				if(i<j) {
+					for(; i < j; i++) {
+						unidadDouble /= 10;
+					}
+				}
+				else if(i>j) {
+					for(; i > j; i--) {
+						unidadDouble *= 10;
+					}
+				}
+				JOptionPane.showMessageDialog(null, unidad + " " + longitud[unidadBase.getSelectedIndex()] + " son "
+						 + unidadDouble + " " + longitud[unidadAConvertir.getSelectedIndex()]);
 			}
 		}
-		else if(i>j) {
-			for(; i > j; i--) {
-				unidadDouble *= 10;
-			}
+		catch(NumberFormatException exception) {
+			JOptionPane.showMessageDialog(null, "Ingrese solo numeros");
 		}
+
 	}
 
 	/**
@@ -287,16 +301,17 @@ public class Conversor {
 		panelConversorLongitud.add(textFieldUnidad);
 		textFieldUnidad.setColumns(10);
 		
-		JButton btnNewButton = new JButton("mostrar");
-		btnNewButton.addActionListener(new ActionListener() {
+		JButton btnConvertirLongitud = new JButton("Convertir");
+		btnConvertirLongitud.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				calcularLongitud(comboBoxLongitudDe, comboBoxLongitudA);
-				JOptionPane.showMessageDialog(null, unidad + " " + longitud[comboBoxLongitudDe.getSelectedIndex()] + " son "
-						 + unidadDouble + " " + longitud[comboBoxLongitudA.getSelectedIndex()]);
+				
+				//JOptionPane.showMessageDialog(null, unidad + " " + longitud[comboBoxLongitudDe.getSelectedIndex()] + " son "
+				//		 + unidadDouble + " " + longitud[comboBoxLongitudA.getSelectedIndex()]);
 			}
 		});
-		btnNewButton.setBounds(159, 113, 85, 21);
-		panelConversorLongitud.add(btnNewButton);
+		btnConvertirLongitud.setBounds(159, 113, 85, 21);
+		panelConversorLongitud.add(btnConvertirLongitud);
 		
 		JButton btnRegresarLongitud = new JButton("Regresar");
 		btnRegresarLongitud.addActionListener(new ActionListener() {
