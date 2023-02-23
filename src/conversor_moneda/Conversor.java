@@ -7,6 +7,7 @@ import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
 import javax.swing.BoxLayout;
@@ -28,6 +29,7 @@ public class Conversor {
 	double resultadoConversion;
 	Double [] conversion = {1.0, 4899.84, 5197.0, 5903.51, 36.3184, 3.76006};
 	String [] monedas = {"pesos Colombianos", "Dólar", "Euros", "Libras esterlinas", "Yen Japonés", "Won sul-coreano"};
+	String [] simboloMoneda = {"COP", "USD", "EUR", "GBP", "JPY", "KRW"};;
 	/**
 	 * Launch the application.
 	 */
@@ -166,6 +168,7 @@ public class Conversor {
 		JButton btnConvertirMoneda = new JButton("Convertir");
 		btnConvertirMoneda.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
 				dinero = textFieldDinero.getText();
 				dineroDouble = Double.parseDouble(dinero);
 				
@@ -177,7 +180,17 @@ public class Conversor {
 					resultadoConversion = dineroDouble * conversion[comboBoxDe.getSelectedIndex() + 1];
 					dineroConvertido = Double.toString(resultadoConversion);
 				}
-				lblNewLabel.setText(dineroConvertido);
+				//lblNewLabel.setText(dineroConvertido);
+				if(invertirConversionMoneda == false) {
+					JOptionPane.showMessageDialog(null, dinero + " " + simboloMoneda[comboBoxDe.getSelectedIndex()] + " son "
+							 + dineroConvertido + " " + simboloMoneda[comboBoxA.getSelectedIndex()+1]);
+				}
+				else {
+					JOptionPane.showMessageDialog(null, dinero + " " + simboloMoneda[comboBoxDe.getSelectedIndex()+1] + " son "
+							 + dineroConvertido + " " + simboloMoneda[comboBoxA.getSelectedIndex()]);
+				}
+				
+
 			}
 		});
 		btnConvertirMoneda.setBounds(164, 156, 96, 21);
