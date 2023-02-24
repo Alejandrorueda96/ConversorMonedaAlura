@@ -46,7 +46,7 @@ public class Conversor {
 	String unidad;
 	Double unidadDouble;
 	private JTextField textFieldUnidad;
-	//LocalDateTime localDate = LocalDateTime.now();
+	
 	
 	
 	/**
@@ -101,7 +101,7 @@ public class Conversor {
 		try {
 			unidad = textFieldUnidad.getText();
 			if(unidad.isEmpty()) {
-				JOptionPane.showMessageDialog(null, "El campo cantidad no puede estar vacio");
+				JOptionPane.showMessageDialog(null, "El campo cantidad no puede estar vacio","Error",JOptionPane.ERROR_MESSAGE);
 			}
 			else {
 				unidadDouble = Double.parseDouble(unidad);
@@ -120,11 +120,11 @@ public class Conversor {
 					}
 				}
 				JOptionPane.showMessageDialog(null, unidad + " " + longitud[unidadBase.getSelectedIndex()] + " son "
-						 + unidadDouble + " " + longitud[unidadAConvertir.getSelectedIndex()]);
+						 + unidadDouble + " " + longitud[unidadAConvertir.getSelectedIndex()], "Conversion exitosa", JOptionPane.INFORMATION_MESSAGE);
 			}
 		}
 		catch(NumberFormatException exception) {
-			JOptionPane.showMessageDialog(null, "Ingrese solo numeros");
+			JOptionPane.showMessageDialog(null, "Ingrese solo numeros","Error",JOptionPane.ERROR_MESSAGE);
 		}
 
 	}
@@ -214,7 +214,7 @@ public class Conversor {
 		panelSeleccion.setLayout(null);
 		
 		JComboBox comboBoxSeleccion = new JComboBox();
-		comboBoxSeleccion.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		comboBoxSeleccion.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		comboBoxSeleccion.setModel(new DefaultComboBoxModel(new String[] {"Conversor de Moneda", "Conversor de Longitud"}));
 		
 		//comboBoxSeleccion.setRenderer(new MiBoxRenderer());
@@ -330,7 +330,7 @@ public class Conversor {
 					dinero = textFieldDinero.getText();
 					
 					if(dinero.isEmpty())
-						JOptionPane.showMessageDialog(null,"El campo cantidad no puede estar vacio!");
+						JOptionPane.showMessageDialog(null,"El campo importe no puede estar vacio!","Error",JOptionPane.ERROR_MESSAGE);
 					else
 					{
 						dineroDouble = Double.parseDouble(dinero);
@@ -346,11 +346,11 @@ public class Conversor {
 						
 						if(invertirConversionMoneda == false) {
 							JOptionPane.showMessageDialog(null, dinero + " " + simboloMoneda[comboBoxDe.getSelectedIndex()] + " son "
-									 + dineroConvertido + " " + simboloMoneda[comboBoxA.getSelectedIndex()+1]);
+									 + dineroConvertido + " " + simboloMoneda[comboBoxA.getSelectedIndex()+1], "Conversion exitosa", JOptionPane.INFORMATION_MESSAGE);
 						}
 						else {
 							JOptionPane.showMessageDialog(null, dinero + " " + simboloMoneda[comboBoxDe.getSelectedIndex()+1] + " son "
-									 + dineroConvertido + " " + simboloMoneda[comboBoxA.getSelectedIndex()]);
+									 + dineroConvertido + " " + simboloMoneda[comboBoxA.getSelectedIndex()], "Conversion exitosa", JOptionPane.INFORMATION_MESSAGE);
 						}
 						
 					}
@@ -358,7 +358,7 @@ public class Conversor {
 				}
 				
 				catch(NumberFormatException exception) {
-					JOptionPane.showMessageDialog(null, "Ingrese solo numeros");
+					JOptionPane.showMessageDialog(null, "Ingrese solo numeros","Error",JOptionPane.ERROR_MESSAGE);
 				}
 
 			}
