@@ -213,22 +213,21 @@ public class Conversor {
 		frame.getContentPane().add(panelSeleccion, "panelSeleccion");
 		panelSeleccion.setLayout(null);
 		
-		JLabel lblTitulo = new JLabel("CONVERSOR");
-		lblTitulo.setBounds(166, 10, 58, 13);
-		panelSeleccion.add(lblTitulo);
-		
 		JComboBox comboBoxSeleccion = new JComboBox();
+		comboBoxSeleccion.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		comboBoxSeleccion.setModel(new DefaultComboBoxModel(new String[] {"Conversor de Moneda", "Conversor de Longitud"}));
 		
 		//comboBoxSeleccion.setRenderer(new MiBoxRenderer());
 		//comboBoxSeleccion.setEditor(new MiBoxEditor());
 		//comboBoxSeleccion.setEditable(true);
 		
-		comboBoxSeleccion.setBounds(101, 48, 199, 21);
+		comboBoxSeleccion.setBounds(169, 56, 208, 37);
 		panelSeleccion.add(comboBoxSeleccion);
 		
 		
 		JButton btnAceptarSeleccion = new JButton("Aceptar");
+		btnAceptarSeleccion.setForeground(new Color(255, 255, 255));
+		btnAceptarSeleccion.setBackground(new Color(51, 0, 255));
 		btnAceptarSeleccion.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -242,17 +241,29 @@ public class Conversor {
 				
 			}
 		});
-		btnAceptarSeleccion.setBounds(101, 90, 85, 21);
+		btnAceptarSeleccion.setBounds(169, 116, 85, 21);
 		panelSeleccion.add(btnAceptarSeleccion);
 		
 		JButton btnCancelarSeleccion = new JButton("Cancelar");
+		btnCancelarSeleccion.setForeground(new Color(255, 255, 255));
+		btnCancelarSeleccion.setBackground(new Color(51, 0, 255));
 		btnCancelarSeleccion.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.exit(0);
 			}
 		});
-		btnCancelarSeleccion.setBounds(220, 90, 85, 21);
+		btnCancelarSeleccion.setBounds(292, 116, 85, 21);
 		panelSeleccion.add(btnCancelarSeleccion);
+		
+		JPanel panel_2 = new JPanel();
+		panel_2.setBackground(new Color(51, 0, 255));
+		panel_2.setBounds(0, 0, 536, 46);
+		panelSeleccion.add(panel_2);
+		
+		JLabel lblTitulo = new JLabel("CONVERSOR ALURA");
+		lblTitulo.setForeground(new Color(255, 255, 255));
+		lblTitulo.setFont(new Font("Myanmar Text", Font.BOLD, 18));
+		panel_2.add(lblTitulo);
 		
 		JPanel panelConversorMoneda = new JPanel();
 		panelConversorMoneda.setBackground(new Color(255, 255, 255));
@@ -373,7 +384,7 @@ public class Conversor {
 		panel.setBounds(0, 0, 536, 46);
 		panelConversorMoneda.add(panel);
 		
-		JLabel lblNewLabel_3 = new JLabel("Conversor de Moneda");
+		JLabel lblNewLabel_3 = new JLabel("CONVERSOR DE MONEDA");
 		panel.add(lblNewLabel_3);
 		lblNewLabel_3.setFont(new Font("Myanmar Text", Font.BOLD, 18));
 		lblNewLabel_3.setForeground(new Color(255, 255, 255));
@@ -426,7 +437,7 @@ public class Conversor {
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBackground(new Color(51, 0, 255));
-		panel_1.setBounds(0, 0, 536, 42);
+		panel_1.setBounds(0, 0, 536, 46);
 		panelConversorLongitud.add(panel_1);
 		
 		JLabel lblTituloHorario = new JLabel("CONVERSOR LONGITUD");
