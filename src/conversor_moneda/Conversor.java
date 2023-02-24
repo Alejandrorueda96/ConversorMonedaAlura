@@ -260,18 +260,18 @@ public class Conversor {
 		panelConversorMoneda.setLayout(null);
 		
 		textFieldDinero = new JTextField();
-		textFieldDinero.setBounds(10, 79, 96, 19);
+		textFieldDinero.setBounds(20, 80, 96, 19);
 		panelConversorMoneda.add(textFieldDinero);
 		textFieldDinero.setColumns(10);
 		
 		JComboBox<String> comboBoxDe = new JComboBox();
 		comboBoxDe.setBackground(new Color(255, 255, 255));
-		comboBoxDe.setBounds(116, 78, 142, 21);
+		comboBoxDe.setBounds(126, 79, 142, 21);
 		panelConversorMoneda.add(comboBoxDe);
 		
 		JComboBox<String> comboBoxA = new JComboBox();
 		comboBoxA.setBackground(new Color(255, 255, 255));
-		comboBoxA.setBounds(363, 78, 142, 21);
+		comboBoxA.setBounds(373, 79, 142, 21);
 		panelConversorMoneda.add(comboBoxA);
 		
 		invertir(comboBoxDe, comboBoxA);
@@ -290,7 +290,7 @@ public class Conversor {
 				invertir(comboBoxDe, comboBoxA);
 			}
 		});
-		btnInvertirSeleccion.setBounds(268, 78, 85, 21);
+		btnInvertirSeleccion.setBounds(278, 79, 85, 21);
 		panelConversorMoneda.add(btnInvertirSeleccion);
 		
 
@@ -357,15 +357,15 @@ public class Conversor {
 		
 		JLabel lblNewLabel = new JLabel("Importe");
 		lblNewLabel.setFont(new Font("Myanmar Text", Font.BOLD, 12));
-		lblNewLabel.setBounds(10, 58, 57, 13);
+		lblNewLabel.setBounds(20, 59, 57, 13);
 		panelConversorMoneda.add(lblNewLabel);
 		
 		JLabel lblNewLabel_1 = new JLabel("Desde la moneda");
-		lblNewLabel_1.setBounds(116, 56, 107, 13);
+		lblNewLabel_1.setBounds(126, 57, 107, 13);
 		panelConversorMoneda.add(lblNewLabel_1);
 		
 		JLabel lblNewLabel_2 = new JLabel("A la moneda");
-		lblNewLabel_2.setBounds(363, 56, 69, 13);
+		lblNewLabel_2.setBounds(373, 57, 69, 13);
 		panelConversorMoneda.add(lblNewLabel_2);
 		
 		JPanel panel = new JPanel();
@@ -381,30 +381,30 @@ public class Conversor {
 
 		
 		JPanel panelConversorLongitud = new JPanel();
+		panelConversorLongitud.setBackground(new Color(255, 255, 255));
 		frame.getContentPane().add(panelConversorLongitud, "panelConversorHorario");
 		panelConversorLongitud.setLayout(null);
 		
-		JLabel lblTituloHorario = new JLabel("CONVERSOR LONGITUD");
-		lblTituloHorario.setBounds(120, 10, 182, 13);
-		panelConversorLongitud.add(lblTituloHorario);
-		
 		
 		JComboBox comboBoxLongitudDe = new JComboBox();
-		comboBoxLongitudDe.setBounds(105, 71, 58, 21);
+		comboBoxLongitudDe.setBounds(238, 74, 63, 27);
 		panelConversorLongitud.add(comboBoxLongitudDe);
 		
 		JComboBox comboBoxLongitudA = new JComboBox();
-		comboBoxLongitudA.setBounds(238, 71, 47, 21);
+		comboBoxLongitudA.setBounds(332, 74, 63, 27);
 		panelConversorLongitud.add(comboBoxLongitudA);
 		
 		inicializarLongitud(comboBoxLongitudDe, comboBoxLongitudA);
 		
 		textFieldUnidad = new JTextField();
-		textFieldUnidad.setBounds(164, 33, 96, 19);
+		textFieldUnidad.setBounds(117, 74, 96, 27);
 		panelConversorLongitud.add(textFieldUnidad);
 		textFieldUnidad.setColumns(10);
 		
 		JButton btnConvertirLongitud = new JButton("Convertir");
+		btnConvertirLongitud.setFont(new Font("Tahoma", Font.BOLD, 14));
+		btnConvertirLongitud.setForeground(new Color(255, 255, 255));
+		btnConvertirLongitud.setBackground(new Color(51, 0, 255));
 		btnConvertirLongitud.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -412,7 +412,7 @@ public class Conversor {
 				
 			}
 		});
-		btnConvertirLongitud.setBounds(159, 113, 85, 21);
+		btnConvertirLongitud.setBounds(185, 111, 137, 36);
 		panelConversorLongitud.add(btnConvertirLongitud);
 		
 		JButton btnRegresarLongitud = new JButton("Regresar");
@@ -423,5 +423,38 @@ public class Conversor {
 		});
 		btnRegresarLongitud.setBounds(0, 242, 85, 21);
 		panelConversorLongitud.add(btnRegresarLongitud);
+		
+		JPanel panel_1 = new JPanel();
+		panel_1.setBackground(new Color(51, 0, 255));
+		panel_1.setBounds(0, 0, 536, 42);
+		panelConversorLongitud.add(panel_1);
+		
+		JLabel lblTituloHorario = new JLabel("CONVERSOR LONGITUD");
+		lblTituloHorario.setForeground(new Color(255, 255, 255));
+		panel_1.add(lblTituloHorario);
+		lblTituloHorario.setFont(new Font("Myanmar Text", Font.BOLD, 18));
+		
+		JLabel lblNewLabel_4 = new JLabel("Cantidad");
+		lblNewLabel_4.setBounds(117, 52, 63, 13);
+		panelConversorLongitud.add(lblNewLabel_4);
+		
+		JLabel lblNewLabel_5 = new JLabel("Convertir de");
+		lblNewLabel_5.setBounds(237, 52, 85, 13);
+		panelConversorLongitud.add(lblNewLabel_5);
+		
+		JLabel lblNewLabel_6 = new JLabel("Convertir a");
+		lblNewLabel_6.setBounds(332, 52, 77, 13);
+		panelConversorLongitud.add(lblNewLabel_6);
+		
+		JButton btnNewButton = new JButton("Atras");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				myLayout.show(frame.getContentPane(), "panelSeleccion" );
+			}
+		});
+		btnNewButton.setBackground(new Color(51, 0, 255));
+		btnNewButton.setForeground(new Color(255, 255, 255));
+		btnNewButton.setBounds(0, 153, 85, 21);
+		panelConversorLongitud.add(btnNewButton);
 	}
 }
