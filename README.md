@@ -10,7 +10,8 @@
       - Libras Esterlinas a COP
       - Yen Japonés a COP
       - Won sul-coreano a COP
-### Adicionalmente se cuenta con un conversor de longitud (metro) en una escala de conversión que comprende desde el milímetro (mm) hasta el kilometro (km). 
+### Adicionalmente se cuenta con un conversor de longitud (metro) en una escala de conversión que comprende desde el milímetro (mm) hasta el kilometro (km).
+### Para ejecutar la aplicacion ejecutar el archivo Conversor.java desde la carperta src/conversor_moneda.
 #### Dudas, sugerencias y comentarios por favor contactarme. 
 
       
