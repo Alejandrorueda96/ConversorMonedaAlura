@@ -34,8 +34,7 @@ public class Conversor {
 
 	private JFrame frame;
 	private JTextField textFieldDinero;
-	boolean invertirConversionMoneda = false;
-	//String dinero;
+
 	public JFrame getFrame() {
 		return frame;
 	}
@@ -60,17 +59,6 @@ public class Conversor {
 		this.textFieldUnidad = textFieldUnidad;
 	}
 
-
-
-
-
-
-	//String dineroConvertido;
-	//double dineroDouble;
-	//double resultadoConversion;
-	//Double [] conversion = {1.0, 4899.84, 5197.0, 5903.51, 36.3184, 3.76006};
-	String [] monedas = {"pesos Colombianos", "Dólar", "Euros", "Libras esterlinas", "Yen Japonés", "Won sul-coreano"};
-	//String [] simboloMoneda = {"COP", "USD", "EUR", "GBP", "JPY", "KRW"};
 	String [] longitud = {"mm", "cm", "dm", "m", "dam", "hm", "km"};
 	String unidad;
 	Double unidadDouble;
@@ -99,26 +87,9 @@ public class Conversor {
 	 */
 	public Conversor() {
 		initialize();
-		logicaConversor = new LogicaConversor(this);		
+		//logicaConversor = new LogicaConversor(this);	
 	}
 
-	public void invertir(JComboBox comboBoxDe, JComboBox comboBoxA) {
-		comboBoxA.removeAllItems();
-		comboBoxDe.removeAllItems();
-		if(invertirConversionMoneda == false) {
-			comboBoxDe.addItem(monedas[0]);
-			for(int i = 1; i <= 5; i++) {
-				comboBoxA.addItem(monedas[i]);
-			}
-		}
-		else {
-			comboBoxA.addItem(monedas[0]);
-			for(int i = 1; i <= 5; i++) {
-				comboBoxDe.addItem(monedas[i]);
-			}
-		}
-	}
-	
 	public void inicializarLongitud(JComboBox unidadBase, JComboBox unidadAConvertir) {
 		for(int i = 0; i <= longitud.length-1; i++) {
 			unidadBase.addItem(longitud[i]);
@@ -158,80 +129,14 @@ public class Conversor {
 		}
 
 	}
-	//Personalizar comboBox
-	class MiBoxRenderer extends JLabel implements ListCellRenderer {
-	    
-	    public MiBoxRenderer() {
-	        setOpaque(true);
-	        setFont(new Font("Arial", Font.PLAIN | Font.PLAIN, 14));
-	        setBackground(new Color(255, 255, 255));
-	        setForeground(Color.BLACK);
-	    }
 
-	    @Override
-	    public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected,
-	            boolean cellHasFocus) {
-	        setText(value.toString());
-	        if(index == 0){
-	            this.setForeground(Color.BLACK);
-	            this.setBackground(Color.white);
-	            if (isSelected) {
-	                this.setBackground(new Color(204, 204, 204));
-	            }
-	        }
-	        if(index == 1){
-	            this.setForeground(Color.BLACK);
-	            this.setBackground(Color.white);
-	            if (isSelected) {
-	                this.setBackground(new Color(204, 204, 204));
-	            }
-	        }
- 
-	        return this;
-	    }
-	    
-	}
-
-	class MiBoxEditor extends BasicComboBoxEditor {
-	    private JLabel label = new JLabel();
-	    private JPanel panel = new JPanel();
-	    private Object selectedItem;
-	     
-	    public MiBoxEditor() {
-	         
-	        label.setOpaque(false);
-	        label.setFont(new Font("Arial", Font.PLAIN, 14));
-	        label.setForeground(Color.BLACK);
-	         
-	        panel.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 2));
-	        panel.add(label);
-	        panel.setBackground(Color.WHITE);
-	
-	    }
-	     
-	    public Component getEditorComponent() {
-	        return this.panel;
-	    }
-	     
-	    public Object getItem() {
-	        return this.selectedItem.toString();
-	    }
-	     
-	    public void setItem(Object item) {
-	        this.selectedItem = item;
-	        label.setText(item.toString());
-	    }
-	}
-	
-	
-	
-	
-	
-	
+		
 	/**
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		logicaConversor = new LogicaConversor(this);
+
 		frame = new JFrame();
 		frame.setBounds(100, 100, 550, 211);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -246,11 +151,7 @@ public class Conversor {
 		JComboBox comboBoxSeleccion = new JComboBox();
 		comboBoxSeleccion.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		comboBoxSeleccion.setModel(new DefaultComboBoxModel(new String[] {"Conversor de Moneda", "Conversor de Longitud"}));
-		
-		//comboBoxSeleccion.setRenderer(new MiBoxRenderer());
-		//comboBoxSeleccion.setEditor(new MiBoxEditor());
-		//comboBoxSeleccion.setEditable(true);
-		
+				
 		comboBoxSeleccion.setBounds(169, 56, 208, 37);
 		panelSeleccion.add(comboBoxSeleccion);
 		
@@ -315,28 +216,19 @@ public class Conversor {
 		comboBoxA.setBounds(373, 79, 142, 21);
 		panelConversorMoneda.add(comboBoxA);
 		
-		invertir(comboBoxDe, comboBoxA);
+		logicaConversor.invertir(comboBoxDe, comboBoxA);
 		
 		JButton btnInvertirSeleccion = new JButton("Invertir");
 		btnInvertirSeleccion.setForeground(new Color(255, 255, 255));
 		btnInvertirSeleccion.setBackground(new Color(51, 0, 255));
 		btnInvertirSeleccion.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(invertirConversionMoneda == false) {
-					invertirConversionMoneda = true;
-				}
-				else {
-					invertirConversionMoneda = false;
-				}
-				invertir(comboBoxDe, comboBoxA);
+
+				logicaConversor.invertir(comboBoxDe, comboBoxA);
 			}
 		});
 		btnInvertirSeleccion.setBounds(278, 79, 85, 21);
 		panelConversorMoneda.add(btnInvertirSeleccion);
-		
-
-
-		
 		
 		JButton btnRegresar = new JButton("Atras");
 		btnRegresar.setForeground(new Color(255, 255, 255));
@@ -385,15 +277,12 @@ public class Conversor {
 		panel.add(lblNewLabel_3);
 		lblNewLabel_3.setFont(new Font("Myanmar Text", Font.BOLD, 18));
 		lblNewLabel_3.setForeground(new Color(255, 255, 255));
-		
-
-		
+			
 		JPanel panelConversorLongitud = new JPanel();
 		panelConversorLongitud.setBackground(new Color(255, 255, 255));
 		frame.getContentPane().add(panelConversorLongitud, "panelConversorHorario");
 		panelConversorLongitud.setLayout(null);
-		
-		
+			
 		JComboBox comboBoxLongitudDe = new JComboBox();
 		comboBoxLongitudDe.setBounds(238, 74, 63, 27);
 		panelConversorLongitud.add(comboBoxLongitudDe);
@@ -465,4 +354,6 @@ public class Conversor {
 		btnNewButton.setBounds(0, 153, 85, 21);
 		panelConversorLongitud.add(btnNewButton);
 	}
+	
+	
 }

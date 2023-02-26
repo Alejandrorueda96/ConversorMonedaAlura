@@ -8,20 +8,22 @@ import javax.swing.JTextField;
 
 public class LogicaConversor {
 
-	Conversor conversor;
+	private Conversor conversor;
 	String dinero;
 	double dineroDouble;
 	double resultadoConversion;
-	boolean invertirConversionMoneda = false; // boton invertir
+	public boolean invertirConversionMoneda = false; // boton invertir
 	String dineroConvertido;
 	// indices conversion de moneda
 	Double[] conversion = { 1.0, 4899.84, 5197.0, 5903.51, 36.3184, 3.76006 };
 	// Simbolos moneda
 	String[] simboloMoneda = { "COP", "USD", "EUR", "GBP", "JPY", "KRW" };
-
+	String [] monedas = {"pesos Colombianos", "Dólar", "Euros", "Libras esterlinas", "Yen Japonés", "Won sul-coreano"};
+	
+	
 	// Constructor
 	public LogicaConversor(Conversor parentConversor) {
-		conversor = parentConversor;
+		this.conversor = parentConversor;
 	}
 
 	public void llenarComboBox(JComboBox cbMonedaOrigen, JComboBox cbMonedaDestino) {
@@ -34,7 +36,7 @@ public class LogicaConversor {
 			else {
 				dineroDouble = Double.parseDouble(dinero);
 
-				if (conversor.invertirConversionMoneda == false) {
+				if (invertirConversionMoneda == false) {
 					resultadoConversion = dineroDouble / conversion[cbMonedaDestino.getSelectedIndex() + 1];
 					dineroConvertido = String.format("%.2f", resultadoConversion);
 
@@ -58,6 +60,31 @@ public class LogicaConversor {
 			JOptionPane.showMessageDialog(null, "Ingrese solo numeros","Error",JOptionPane.ERROR_MESSAGE);
 		}
 
+	}
+	
+	
+	public void invertir(JComboBox cbMonedaOrigen, JComboBox cbMonedaDestino) {
+		
+		if(invertirConversionMoneda == false) {
+			invertirConversionMoneda = true;
+		}
+		else {
+			invertirConversionMoneda = false;
+		}
+		cbMonedaDestino.removeAllItems();
+		cbMonedaOrigen.removeAllItems();
+		if(invertirConversionMoneda == false) {
+			cbMonedaOrigen.addItem(monedas[0]);
+			for(int i = 1; i <= 5; i++) {
+				cbMonedaDestino.addItem(monedas[i]);
+			}
+		}
+		else {
+			cbMonedaDestino.addItem(monedas[0]);
+			for(int i = 1; i <= 5; i++) {
+				cbMonedaOrigen.addItem(monedas[i]);
+			}
+		}
 	}
 
 }
