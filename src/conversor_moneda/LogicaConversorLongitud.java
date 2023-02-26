@@ -11,19 +11,27 @@ public class LogicaConversorLongitud {
 	Double unidadDouble;
 	
 	
+	public String[] getLongitud() {
+		return longitud;
+	}
+
+	public void setLongitud(String[] longitud) {
+		this.longitud = longitud;
+	}
+
 	// Constructor
 	public LogicaConversorLongitud(Conversor parentConversor) {
 		this.conversor = parentConversor;
 	}
 
-	public void inicializarLongitud(JComboBox unidadBase, JComboBox unidadAConvertir) {
-		for(int i = 0; i <= longitud.length-1; i++) {
-			unidadBase.addItem(longitud[i]);
-			unidadAConvertir.addItem(longitud[i]);
+	public void inicializarLongitud(JComboBox unidadBase, JComboBox unidadAConvertir, String[] simbolos) {
+		for(int i = 0; i <= simbolos.length-1; i++) {
+			unidadBase.addItem(simbolos[i]);
+			unidadAConvertir.addItem(simbolos[i]);
 		}
 	}
 	
-	public void calcularLongitud(JComboBox unidadBase, JComboBox unidadAConvertir) {
+	public void calcularLongitud(JComboBox unidadBase, JComboBox unidadAConvertir, String[] simbolos) {
 		
 		try {
 			unidad = conversor.getTextFieldUnidad().getText();
@@ -46,8 +54,8 @@ public class LogicaConversorLongitud {
 						unidadDouble *= 10;
 					}
 				}
-				JOptionPane.showMessageDialog(null, unidad + " " + longitud[unidadBase.getSelectedIndex()] + " son "
-						 + unidadDouble + " " + longitud[unidadAConvertir.getSelectedIndex()], "Conversion exitosa", JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(null, unidad + " " + simbolos[unidadBase.getSelectedIndex()] + " son "
+						 + unidadDouble + " " + simbolos[unidadAConvertir.getSelectedIndex()], "Conversion exitosa", JOptionPane.INFORMATION_MESSAGE);
 			}
 		}
 		catch(NumberFormatException exception) {

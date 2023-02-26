@@ -15,7 +15,7 @@ public class LogicaConversor {
 	public boolean invertirConversionMoneda = true; // boton invertir
 	String dineroConvertido;
 	
-	// indices conversion de moneda
+	// 
 	Double[] conversion = { 1.0, 4899.84, 5197.0, 5903.51, 36.3184, 3.76006 };
 	
 	// Simbolos moneda

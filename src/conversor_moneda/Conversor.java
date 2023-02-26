@@ -173,6 +173,7 @@ public class Conversor {
 		comboBoxA.setBounds(373, 79, 142, 21);
 		panelConversorMoneda.add(comboBoxA);
 		
+		//Inicializar comboBox con los valores del Array que contienen las representaciones de la moneda
 		logicaConversor.invertir(comboBoxDe, comboBoxA);
 		
 		JButton btnInvertirSeleccion = new JButton("Invertir");
@@ -248,7 +249,7 @@ public class Conversor {
 		comboBoxLongitudA.setBounds(332, 74, 63, 27);
 		panelConversorLongitud.add(comboBoxLongitudA);
 		
-		logicaConversorLongitud.inicializarLongitud(comboBoxLongitudDe, comboBoxLongitudA);
+		logicaConversorLongitud.inicializarLongitud(comboBoxLongitudDe, comboBoxLongitudA, logicaConversorLongitud.longitud);
 		
 		textFieldUnidad = new JTextField();
 		textFieldUnidad.setBounds(117, 74, 96, 27);
@@ -262,7 +263,7 @@ public class Conversor {
 		btnConvertirLongitud.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				logicaConversorLongitud.calcularLongitud(comboBoxLongitudDe, comboBoxLongitudA);
+				logicaConversorLongitud.calcularLongitud(comboBoxLongitudDe, comboBoxLongitudA, logicaConversorLongitud.longitud);
 				
 			}
 		});
