@@ -12,7 +12,7 @@ public class LogicaConversor {
 	String dinero;
 	double dineroDouble;
 	double resultadoConversion;
-	public boolean invertirConversionMoneda = false; // boton invertir
+	public boolean invertirConversionMoneda = true; // boton invertir
 	String dineroConvertido;
 	
 	// indices conversion de moneda
