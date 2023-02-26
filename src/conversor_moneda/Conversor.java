@@ -35,19 +35,48 @@ public class Conversor {
 	private JFrame frame;
 	private JTextField textFieldDinero;
 	boolean invertirConversionMoneda = false;
-	String dinero;
-	String dineroConvertido;
-	double dineroDouble;
-	double resultadoConversion;
-	Double [] conversion = {1.0, 4899.84, 5197.0, 5903.51, 36.3184, 3.76006};
+	//String dinero;
+	public JFrame getFrame() {
+		return frame;
+	}
+
+	public void setFrame(JFrame frame) {
+		this.frame = frame;
+	}
+
+	public JTextField getTextFieldDinero() {
+		return textFieldDinero;
+	}
+
+	public void setTextFieldDinero(JTextField textFieldDinero) {
+		this.textFieldDinero = textFieldDinero;
+	}
+
+	public JTextField getTextFieldUnidad() {
+		return textFieldUnidad;
+	}
+
+	public void setTextFieldUnidad(JTextField textFieldUnidad) {
+		this.textFieldUnidad = textFieldUnidad;
+	}
+
+
+
+
+
+
+	//String dineroConvertido;
+	//double dineroDouble;
+	//double resultadoConversion;
+	//Double [] conversion = {1.0, 4899.84, 5197.0, 5903.51, 36.3184, 3.76006};
 	String [] monedas = {"pesos Colombianos", "Dólar", "Euros", "Libras esterlinas", "Yen Japonés", "Won sul-coreano"};
-	String [] simboloMoneda = {"COP", "USD", "EUR", "GBP", "JPY", "KRW"};
+	//String [] simboloMoneda = {"COP", "USD", "EUR", "GBP", "JPY", "KRW"};
 	String [] longitud = {"mm", "cm", "dm", "m", "dam", "hm", "km"};
 	String unidad;
 	Double unidadDouble;
 	private JTextField textFieldUnidad;
 	
-	
+	LogicaConversor logicaConversor;
 	
 	/**
 	 * Launch the application.
@@ -70,6 +99,7 @@ public class Conversor {
 	 */
 	public Conversor() {
 		initialize();
+		logicaConversor = new LogicaConversor(this);		
 	}
 
 	public void invertir(JComboBox comboBoxDe, JComboBox comboBoxA) {
@@ -326,40 +356,7 @@ public class Conversor {
 		btnConvertirMoneda.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				try {
-					dinero = textFieldDinero.getText();
-					
-					if(dinero.isEmpty())
-						JOptionPane.showMessageDialog(null,"El campo importe no puede estar vacio!","Error",JOptionPane.ERROR_MESSAGE);
-					else
-					{
-						dineroDouble = Double.parseDouble(dinero);
-						
-						if(invertirConversionMoneda == false) {
-							resultadoConversion = dineroDouble / conversion[comboBoxA.getSelectedIndex() + 1];
-							dineroConvertido = String.format("%.2f",resultadoConversion);
-						}
-						else {
-							resultadoConversion = dineroDouble * conversion[comboBoxDe.getSelectedIndex() + 1];
-							dineroConvertido = String.format("%.2f",resultadoConversion);
-						}
-						
-						if(invertirConversionMoneda == false) {
-							JOptionPane.showMessageDialog(null, dinero + " " + simboloMoneda[comboBoxDe.getSelectedIndex()] + " son "
-									 + dineroConvertido + " " + simboloMoneda[comboBoxA.getSelectedIndex()+1], "Conversion exitosa", JOptionPane.INFORMATION_MESSAGE);
-						}
-						else {
-							JOptionPane.showMessageDialog(null, dinero + " " + simboloMoneda[comboBoxDe.getSelectedIndex()+1] + " son "
-									 + dineroConvertido + " " + simboloMoneda[comboBoxA.getSelectedIndex()], "Conversion exitosa", JOptionPane.INFORMATION_MESSAGE);
-						}
-						
-					}
-
-				}
-				
-				catch(NumberFormatException exception) {
-					JOptionPane.showMessageDialog(null, "Ingrese solo numeros","Error",JOptionPane.ERROR_MESSAGE);
-				}
+				logicaConversor.llenarComboBox(comboBoxDe, comboBoxA);
 
 			}
 		});
