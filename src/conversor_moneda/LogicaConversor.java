@@ -14,8 +14,10 @@ public class LogicaConversor {
 	double resultadoConversion;
 	public boolean invertirConversionMoneda = false; // boton invertir
 	String dineroConvertido;
+	
 	// indices conversion de moneda
 	Double[] conversion = { 1.0, 4899.84, 5197.0, 5903.51, 36.3184, 3.76006 };
+	
 	// Simbolos moneda
 	String[] simboloMoneda = { "COP", "USD", "EUR", "GBP", "JPY", "KRW" };
 	String [] monedas = {"pesos Colombianos", "Dólar", "Euros", "Libras esterlinas", "Yen Japonés", "Won sul-coreano"};

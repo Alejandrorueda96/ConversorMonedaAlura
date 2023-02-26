@@ -34,7 +34,8 @@ public class Conversor {
 
 	private JFrame frame;
 	private JTextField textFieldDinero;
-
+	private JTextField textFieldUnidad;
+	
 	public JFrame getFrame() {
 		return frame;
 	}
@@ -59,12 +60,8 @@ public class Conversor {
 		this.textFieldUnidad = textFieldUnidad;
 	}
 
-	String [] longitud = {"mm", "cm", "dm", "m", "dam", "hm", "km"};
-	String unidad;
-	Double unidadDouble;
-	private JTextField textFieldUnidad;
-	
 	LogicaConversor logicaConversor;
+	LogicaConversorLongitud logicaConversorLongitud;
 	
 	/**
 	 * Launch the application.
@@ -89,53 +86,13 @@ public class Conversor {
 		initialize();
 		//logicaConversor = new LogicaConversor(this);	
 	}
-
-	public void inicializarLongitud(JComboBox unidadBase, JComboBox unidadAConvertir) {
-		for(int i = 0; i <= longitud.length-1; i++) {
-			unidadBase.addItem(longitud[i]);
-			unidadAConvertir.addItem(longitud[i]);
-		}
-	}
 	
-	public void calcularLongitud(JComboBox unidadBase, JComboBox unidadAConvertir) {
-		
-		try {
-			unidad = textFieldUnidad.getText();
-			if(unidad.isEmpty()) {
-				JOptionPane.showMessageDialog(null, "El campo cantidad no puede estar vacio","Error",JOptionPane.ERROR_MESSAGE);
-			}
-			else {
-				unidadDouble = Double.parseDouble(unidad);
-				
-				int i = unidadBase.getSelectedIndex();
-				int j = unidadAConvertir.getSelectedIndex();
-				
-				if(i<j) {
-					for(; i < j; i++) {
-						unidadDouble /= 10;
-					}
-				}
-				else if(i>j) {
-					for(; i > j; i--) {
-						unidadDouble *= 10;
-					}
-				}
-				JOptionPane.showMessageDialog(null, unidad + " " + longitud[unidadBase.getSelectedIndex()] + " son "
-						 + unidadDouble + " " + longitud[unidadAConvertir.getSelectedIndex()], "Conversion exitosa", JOptionPane.INFORMATION_MESSAGE);
-			}
-		}
-		catch(NumberFormatException exception) {
-			JOptionPane.showMessageDialog(null, "Ingrese solo numeros","Error",JOptionPane.ERROR_MESSAGE);
-		}
-
-	}
-
-		
 	/**
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
 		logicaConversor = new LogicaConversor(this);
+		logicaConversorLongitud = new LogicaConversorLongitud(this);
 
 		frame = new JFrame();
 		frame.setBounds(100, 100, 550, 211);
@@ -291,7 +248,7 @@ public class Conversor {
 		comboBoxLongitudA.setBounds(332, 74, 63, 27);
 		panelConversorLongitud.add(comboBoxLongitudA);
 		
-		inicializarLongitud(comboBoxLongitudDe, comboBoxLongitudA);
+		logicaConversorLongitud.inicializarLongitud(comboBoxLongitudDe, comboBoxLongitudA);
 		
 		textFieldUnidad = new JTextField();
 		textFieldUnidad.setBounds(117, 74, 96, 27);
@@ -305,7 +262,7 @@ public class Conversor {
 		btnConvertirLongitud.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				calcularLongitud(comboBoxLongitudDe, comboBoxLongitudA);
+				logicaConversorLongitud.calcularLongitud(comboBoxLongitudDe, comboBoxLongitudA);
 				
 			}
 		});
