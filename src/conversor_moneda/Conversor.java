@@ -13,6 +13,7 @@ import javax.swing.JComboBox;
 import javax.swing.JButton;
 import javax.swing.BoxLayout;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.FlowLayout;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JTextField;
@@ -120,6 +121,7 @@ public class Conversor {
 		logicaConversorLongitud = new LogicaConversorLongitud(this);
 
 		frame = new JFrame();
+		frame.setResizable(false);
 		frame.setBounds(100, 100, 550, 211);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		CardLayout myLayout = new CardLayout();
@@ -339,6 +341,12 @@ public class Conversor {
 		btnNewButton.setBounds(0, 153, 85, 21);
 		panelConversorLongitud.add(btnNewButton);
 		
+		//JLabel imgUnidad = new JLabel("");
+		//Image img = new ImageIcon(this.getClass().getResource("/pesa.png")).getImage();
+		//imgUnidad.setIcon(new ImageIcon(img));
+		//imgUnidad.setBounds(412, 56, 114, 108);
+		//panelConversorLongitud.add(imgUnidad);
+		
 		
 	}
 
@@ -353,6 +361,4 @@ public class Conversor {
 	public void setIndexActual(int indexActual) {
 		this.indexActual = indexActual;
 	}
-	
-	
 }
