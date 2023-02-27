@@ -52,7 +52,7 @@ public class LogicaConversorLongitud {
 		}
 	}
 	
-	public void calcularLongitud(JComboBox unidadBase, JComboBox unidadAConvertir, String[] simbolos) {
+	public void calcularLongitud(String[] simbolos) {
 		
 		try {
 			unidad = conversor.getTextFieldUnidad().getText();
@@ -61,27 +61,46 @@ public class LogicaConversorLongitud {
 			}
 			else {
 				unidadDouble = Double.parseDouble(unidad);
-				
-				int i = unidadBase.getSelectedIndex();
-				int j = unidadAConvertir.getSelectedIndex();
-				
-				if(i<j) {
-					for(; i < j; i++) {
-						unidadDouble /= 10;
-					}
+				if(unidadDouble < 0) {
+					JOptionPane.showMessageDialog(null, "No ingrese valores negativos","Error",JOptionPane.ERROR_MESSAGE);
 				}
-				else if(i>j) {
-					for(; i > j; i--) {
-						unidadDouble *= 10;
+				else {
+					int i = conversor.getComboBoxLongitudDe().getSelectedIndex();
+					int j = conversor.getComboBoxLongitudA().getSelectedIndex();
+					
+					if(i<j) {
+						for(; i < j; i++) {
+							unidadDouble /= 10;
+						}
 					}
+					else if(i>j) {
+						for(; i > j; i--) {
+							unidadDouble *= 10;
+						}
+					}
+					JOptionPane.showMessageDialog(null, unidad + " " + simbolos[conversor.getComboBoxLongitudDe().getSelectedIndex()] + " son "
+							 + unidadDouble + " " + simbolos[conversor.getComboBoxLongitudA().getSelectedIndex()], "Conversion exitosa", JOptionPane.INFORMATION_MESSAGE);
 				}
-				JOptionPane.showMessageDialog(null, unidad + " " + simbolos[unidadBase.getSelectedIndex()] + " son "
-						 + unidadDouble + " " + simbolos[unidadAConvertir.getSelectedIndex()], "Conversion exitosa", JOptionPane.INFORMATION_MESSAGE);
+
 			}
 		}
 		catch(NumberFormatException exception) {
 			JOptionPane.showMessageDialog(null, "Ingrese solo numeros","Error",JOptionPane.ERROR_MESSAGE);
 		}
 
+	}
+	
+	public void conversionUnidades() {
+		if(conversor.getIndexActual() == 1) {
+			calcularLongitud(longitud);
+		}
+		else if(conversor.getIndexActual() == 2)
+		{
+			calcularLongitud(masa);
+		}
+		else if(conversor.getIndexActual() == 3)
+		{
+			calcularLongitud(capacidad);
+		}
 	}
 }

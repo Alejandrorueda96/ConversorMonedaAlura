@@ -12,10 +12,10 @@ public class LogicaConversor {
 	String dinero;
 	double dineroDouble;
 	double resultadoConversion;
-	public boolean invertirConversionMoneda = true; // boton invertir
+	public boolean invertirConversionMoneda = true; // Status boton invertir
 	String dineroConvertido;
 	
-	// 
+	// indices para convertir la moneda colombiana a la extranjera 
 	Double[] conversion = { 1.0, 4899.84, 5197.0, 5903.51, 36.3184, 3.76006 };
 	
 	// Simbolos moneda
@@ -37,25 +37,30 @@ public class LogicaConversor {
 						JOptionPane.ERROR_MESSAGE);
 			else {
 				dineroDouble = Double.parseDouble(dinero);
-
-				if (invertirConversionMoneda == false) {
-					resultadoConversion = dineroDouble / conversion[cbMonedaDestino.getSelectedIndex() + 1];
-					dineroConvertido = String.format("%.2f", resultadoConversion);
-
-					JOptionPane.showMessageDialog(null,
-							dinero + " " + simboloMoneda[cbMonedaOrigen.getSelectedIndex()] + " son " + dineroConvertido + " "
-									+ simboloMoneda[cbMonedaDestino.getSelectedIndex() + 1],
-							"Conversion exitosa", JOptionPane.INFORMATION_MESSAGE);
-				} else {
-					resultadoConversion = dineroDouble * conversion[cbMonedaOrigen.getSelectedIndex() + 1];
-					dineroConvertido = String.format("%.2f", resultadoConversion);
-
-					JOptionPane.showMessageDialog(null,
-							dinero + " " + simboloMoneda[cbMonedaOrigen.getSelectedIndex() + 1] + " son " + dineroConvertido + " "
-									+ simboloMoneda[cbMonedaDestino.getSelectedIndex()],
-							"Conversion exitosa", JOptionPane.INFORMATION_MESSAGE);
+				if(dineroDouble < 0) {
+					JOptionPane.showMessageDialog(null, "No ingrese valores negativos", "Error",
+							JOptionPane.ERROR_MESSAGE);
 				}
+				else {
+					if (invertirConversionMoneda == false) {
+						resultadoConversion = dineroDouble / conversion[cbMonedaDestino.getSelectedIndex() + 1];
+						dineroConvertido = String.format("%.2f", resultadoConversion);
 
+						JOptionPane.showMessageDialog(null,
+								dinero + " " + simboloMoneda[cbMonedaOrigen.getSelectedIndex()] + " son " + dineroConvertido + " "
+										+ simboloMoneda[cbMonedaDestino.getSelectedIndex() + 1],
+								"Conversion exitosa", JOptionPane.INFORMATION_MESSAGE);
+					} else {
+						resultadoConversion = dineroDouble * conversion[cbMonedaOrigen.getSelectedIndex() + 1];
+						dineroConvertido = String.format("%.2f", resultadoConversion);
+
+						JOptionPane.showMessageDialog(null,
+								dinero + " " + simboloMoneda[cbMonedaOrigen.getSelectedIndex() + 1] + " son " + dineroConvertido + " "
+										+ simboloMoneda[cbMonedaDestino.getSelectedIndex()],
+								"Conversion exitosa", JOptionPane.INFORMATION_MESSAGE);
+					}
+				}
+				
 			}
 		}
 		catch(NumberFormatException exception) {

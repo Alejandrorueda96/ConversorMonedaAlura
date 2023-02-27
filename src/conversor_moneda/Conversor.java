@@ -144,6 +144,7 @@ public class Conversor {
 		btnAceptarSeleccion.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
+				textFieldUnidad.setText("");
 				indexActual = comboBoxSeleccion.getSelectedIndex();
 				if(indexActual == 0) {
 					myLayout.show(frame.getContentPane(), "panelConversorMoneda" );
@@ -289,7 +290,7 @@ public class Conversor {
 		btnConvertirLongitud.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				logicaConversorLongitud.calcularLongitud(comboBoxLongitudDe, comboBoxLongitudA, logicaConversorLongitud.longitud);
+				logicaConversorLongitud.conversionUnidades();
 				
 			}
 		});
