@@ -7,6 +7,8 @@ public class LogicaConversorLongitud {
 	
 	private Conversor conversor;
 	String [] longitud = {"mm", "cm", "dm", "m", "dam", "hm", "km"};
+	String [] masa = {"mg", "cg", "dg", "g", "dag", "hg", "kg"};
+	String [] capacidad = {"mL", "cL", "dL", "L", "daL", "hL", "kL"};
 	String unidad;
 	Double unidadDouble;
 	
@@ -24,10 +26,29 @@ public class LogicaConversorLongitud {
 		this.conversor = parentConversor;
 	}
 
-	public void inicializarLongitud(JComboBox unidadBase, JComboBox unidadAConvertir, String[] simbolos) {
+	public void inicializarLongitud(String[] simbolos) {
+		conversor.getComboBoxLongitudDe().removeAllItems();
+		conversor.getComboBoxLongitudA().removeAllItems();
+		
 		for(int i = 0; i <= simbolos.length-1; i++) {
-			unidadBase.addItem(simbolos[i]);
-			unidadAConvertir.addItem(simbolos[i]);
+			conversor.getComboBoxLongitudDe().addItem(simbolos[i]);
+			conversor.getComboBoxLongitudA().addItem(simbolos[i]);
+			
+		}
+	}
+	
+	public void inicializarComboBox() {
+		if(conversor.getIndexActual() == 1) {
+			conversor.getLblTituloMedida().setText("CONVERSOR DE LONGITUD");
+			inicializarLongitud(longitud);
+		}
+		else if(conversor.getIndexActual() == 2) {
+			conversor.getLblTituloMedida().setText("CONVERSOR DE MASA");
+			inicializarLongitud(masa);
+		}
+		else if(conversor.getIndexActual() == 3) {
+			conversor.getLblTituloMedida().setText("CONVERSOR DE CAPACIDAD");
+			inicializarLongitud(capacidad);
 		}
 	}
 	

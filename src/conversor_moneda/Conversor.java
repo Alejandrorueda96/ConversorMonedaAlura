@@ -35,7 +35,31 @@ public class Conversor {
 	private JFrame frame;
 	private JTextField textFieldDinero;
 	private JTextField textFieldUnidad;
+	public int indexActual = 0;
+	private JComboBox comboBoxLongitudDe = new JComboBox();
+	private JComboBox comboBoxLongitudA = new JComboBox();
+	private JLabel lblTituloMedida = new JLabel();
 	
+	public JLabel getLblTituloMedida() {
+		return lblTituloMedida;
+	}
+
+	public JComboBox getComboBoxLongitudDe() {
+		return comboBoxLongitudDe;
+	}
+
+	public void setComboBoxLongitudDe(JComboBox comboBoxLongitudDe) {
+		this.comboBoxLongitudDe = comboBoxLongitudDe;
+	}
+
+	public JComboBox getComboBoxLongitudA() {
+		return comboBoxLongitudA;
+	}
+
+	public void setComboBoxLongitudA(JComboBox comboBoxLongitudA) {
+		this.comboBoxLongitudA = comboBoxLongitudA;
+	}
+
 	public JFrame getFrame() {
 		return frame;
 	}
@@ -85,6 +109,7 @@ public class Conversor {
 	public Conversor() {
 		initialize();
 		//logicaConversor = new LogicaConversor(this);	
+		
 	}
 	
 	/**
@@ -107,7 +132,7 @@ public class Conversor {
 		
 		JComboBox comboBoxSeleccion = new JComboBox();
 		comboBoxSeleccion.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		comboBoxSeleccion.setModel(new DefaultComboBoxModel(new String[] {"Conversor de Moneda", "Conversor de Longitud"}));
+		comboBoxSeleccion.setModel(new DefaultComboBoxModel(new String[] {"Conversor de Moneda", "Conversor de Longitud", "Conversor de Masa", "Conversor de Capacidad"}));
 				
 		comboBoxSeleccion.setBounds(169, 56, 208, 37);
 		panelSeleccion.add(comboBoxSeleccion);
@@ -119,14 +144,14 @@ public class Conversor {
 		btnAceptarSeleccion.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				int indexCombo = comboBoxSeleccion.getSelectedIndex();
-				if(indexCombo == 0) {
+				indexActual = comboBoxSeleccion.getSelectedIndex();
+				if(indexActual == 0) {
 					myLayout.show(frame.getContentPane(), "panelConversorMoneda" );
 				}
-				else if(indexCombo == 1) {
+				else if(indexActual == 1 || indexActual == 2 || indexActual == 3) {
 					myLayout.show(frame.getContentPane(), "panelConversorHorario" );
+					logicaConversorLongitud.inicializarComboBox();
 				}
-				
 			}
 		});
 		btnAceptarSeleccion.setBounds(169, 116, 85, 21);
@@ -241,15 +266,16 @@ public class Conversor {
 		frame.getContentPane().add(panelConversorLongitud, "panelConversorHorario");
 		panelConversorLongitud.setLayout(null);
 			
-		JComboBox comboBoxLongitudDe = new JComboBox();
+		//JComboBox comboBoxLongitudDe = new JComboBox();
 		comboBoxLongitudDe.setBounds(238, 74, 63, 27);
 		panelConversorLongitud.add(comboBoxLongitudDe);
 		
-		JComboBox comboBoxLongitudA = new JComboBox();
+		//JComboBox comboBoxLongitudA = new JComboBox();
 		comboBoxLongitudA.setBounds(332, 74, 63, 27);
 		panelConversorLongitud.add(comboBoxLongitudA);
 		
-		logicaConversorLongitud.inicializarLongitud(comboBoxLongitudDe, comboBoxLongitudA, logicaConversorLongitud.longitud);
+		//logicaConversorLongitud.inicializarLongitud(comboBoxLongitudDe, comboBoxLongitudA, logicaConversorLongitud.longitud);
+		//logicaConversorLongitud.inicializarComboBox(comboBoxLongitudDe, comboBoxLongitudA);
 		
 		textFieldUnidad = new JTextField();
 		textFieldUnidad.setBounds(117, 74, 96, 27);
@@ -284,10 +310,10 @@ public class Conversor {
 		panel_1.setBounds(0, 0, 536, 46);
 		panelConversorLongitud.add(panel_1);
 		
-		JLabel lblTituloHorario = new JLabel("CONVERSOR LONGITUD");
-		lblTituloHorario.setForeground(new Color(255, 255, 255));
-		panel_1.add(lblTituloHorario);
-		lblTituloHorario.setFont(new Font("Myanmar Text", Font.BOLD, 18));
+		//JLabel lblTituloMedida = new JLabel("CONVERSOR LONGITUD");
+		lblTituloMedida.setForeground(new Color(255, 255, 255));
+		panel_1.add(lblTituloMedida);
+		lblTituloMedida.setFont(new Font("Myanmar Text", Font.BOLD, 18));
 		
 		JLabel lblNewLabel_4 = new JLabel("Cantidad");
 		lblNewLabel_4.setBounds(117, 52, 63, 13);
@@ -311,6 +337,20 @@ public class Conversor {
 		btnNewButton.setForeground(new Color(255, 255, 255));
 		btnNewButton.setBounds(0, 153, 85, 21);
 		panelConversorLongitud.add(btnNewButton);
+		
+		
+	}
+
+	public void setLblTituloMedida(JLabel lblTituloMedida) {
+		this.lblTituloMedida = lblTituloMedida;
+	}
+
+	public int getIndexActual() {
+		return indexActual;
+	}
+
+	public void setIndexActual(int indexActual) {
+		this.indexActual = indexActual;
 	}
 	
 	
